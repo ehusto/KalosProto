@@ -1,0 +1,57 @@
+/* Main container for the navbar */
+.navbar {
+  display: flex; /* Use flexbox to align items in a row */
+  justify-content: space-between; /* Pushes brand to the left and links to the right */
+  align-items: center; /* Vertically centers the content */
+  background-image: linear-gradient(
+    to right,
+    black 15%,
+    #8800ff
+  ); /* A nice dark blue/grey background */
+  padding: 0 20px; /* Add some padding on the left and right */
+  color: white;
+  height: 60px;
+}
+
+/* Styling for the main brand/logo */
+.navbar-brand {
+  font-size: 1.5rem; /* Make the brand text bigger */
+  font-weight: bold;
+  color: white;
+  text-decoration: none; /* Remove the default underline from links */
+}
+
+/* This holds the list of navigation links */
+.navbar-nav {
+  list-style: none; /* Remove the default bullet points from the list */
+  display: flex; /* Make the list items sit in a row */
+  margin: 0;
+  padding: 0;
+}
+
+/* A single navigation item */
+.nav-item {
+  margin-left: 20px; /* Add some space between the links */
+}
+
+/* The actual navigation link text */
+.nav-link {
+  color: white;
+  text-decoration: none; /* Remove the underline */
+  font-size: 1rem;
+  padding: 8px 12px;
+  border-radius: 5px;
+  transition: background-color 0.2s ease-in-out; /* Smooth transition for hover effect */
+}
+
+/* This style applies when you hover your mouse over a link */
+.nav-link:hover {
+  background-color: black; /* A slightly lighter shade for the hover effect */
+}
+
+/* Add this new rule to the bottom of Navbar.css */
+
+.navbar-brand:focus {
+  outline: none; /* Removes the default outline */
+  box-shadow: none; /* Some browsers use box-shadow for focus, so we remove that too */
+}
