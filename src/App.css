@@ -1,38 +1,47 @@
+/* File: src/App.css */
+/* This file is for high-level styles and page background themes. */
+
+/* A basic style for the main App container */
 .App {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* 
+  A style for our main content area to ensure it takes up the full height
+  minus the navbar. This helps with vertical centering of backgrounds.
+*/
+.page-content {
+  padding: 20px;
+  height: calc(
+    100vh - 60px
+  ); /* 100% of the viewport height minus the 60px navbar */
+  box-sizing: border-box; /* Ensures padding is included in the height calculation */
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* --- PAGE BACKGROUND THEMES --- */
+/* Now we define a class for each page's background style. */
+
+/* The default background for pages without a specific theme */
+.default-background {
+  background-color: #f8f9fa; /* A very light, clean grey */
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+/* Theme for the Dashboard page */
+.dashboard-background {
+  background-color: #f4f6f8;
+  /* Use the new, correct path from the public folder */
+  background-image: url("/large20.png");
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
 }
 
-.App-link {
-  color: #61dafb;
+/* Theme for the Customers pages */
+.customers-background {
+  background-color: #eaf2f8; /* A very light blue */
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Theme for the Jobs pages */
+.jobs-background {
+  background-color: #e8f6f3; /* A very light green */
 }

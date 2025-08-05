@@ -8,7 +8,7 @@ function Navbar() {
   return (
     <nav className="navbar">
       <Link to="/" className="navbar-brand">
-        Kalos Exteriors
+        ERP System
       </Link>
       <ul className="navbar-nav">
         <li className="nav-item">
@@ -21,10 +21,15 @@ function Navbar() {
             Customers
           </Link>
         </li>
+        {/* --- THIS IS THE NEW LINK FOR THE JOBS MODULE --- */}
+        <li className="nav-item">
+          <Link to="/jobs" className="nav-link">
+            Jobs
+          </Link>
+        </li>
       </ul>
     </nav>
   );
 }
 
-// CRUCIAL: Make sure this line is at the very bottom!
 export default Navbar;

@@ -50,8 +50,8 @@
 }
 
 /* Add this new rule to the bottom of Navbar.css */
-
-.navbar-brand:focus {
+.navbar-brand:focus,
+.navbar-link:focus {
   outline: none; /* Removes the default outline */
   box-shadow: none; /* Some browsers use box-shadow for focus, so we remove that too */
 }
