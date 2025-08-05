@@ -2,14 +2,17 @@
 
 import React from "react";
 import { Link } from "react-router-dom";
-import { useCustomers } from "../../context/CustomerContext"; // <-- IMPORT our custom hook
-import CustomerCard from "../../components/CustomerCard"; // <-- IMPORT the reusable card
-import "./CustomerListPage.css"; // <-- Its own specific styles
+import { useCustomers } from "../../context/CustomerContext";
+import CustomerCard from "../../components/CustomerCard";
+import "./CustomerListPage.css";
 
 function CustomerListPage() {
-  // --- THIS IS THE KEY CHANGE ---
-  // We get the 'customers' list directly from the context, no props needed!
   const { customers } = useCustomers();
+
+  console.log(
+    "CUSTOMER LIST PAGE: Received customers from context:",
+    customers
+  );
 
   const listContainerStyle = {
     display: "flex",
@@ -18,7 +21,6 @@ function CustomerListPage() {
   };
 
   return (
-    // Use the global 'page-content' and 'customers-background' classes for layout
     <div className="page-content customers-background">
       <div className="customer-list-header">
         <h2>Customer Management</h2>
@@ -28,7 +30,6 @@ function CustomerListPage() {
       </div>
 
       <div style={listContainerStyle}>
-        {/* We map over the 'customers' variable we got from the context */}
         {customers.map((customer) => (
           <CustomerCard key={customer._id} customer={customer} />
         ))}

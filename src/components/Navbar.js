@@ -8,7 +8,7 @@ function Navbar() {
   return (
     <nav className="navbar">
       <Link to="/" className="navbar-brand">
-        ERP System
+        Kalos Exteriors
       </Link>
       <ul className="navbar-nav">
         <li className="nav-item">

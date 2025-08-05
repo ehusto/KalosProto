@@ -1,47 +1,30 @@
 /* File: src/App.css */
-/* This file is for high-level styles and page background themes. */
 
-/* A basic style for the main App container */
 .App {
   text-align: center;
 }
 
-/* 
-  A style for our main content area to ensure it takes up the full height
-  minus the navbar. This helps with vertical centering of backgrounds.
-*/
 .page-content {
   padding: 20px;
-  height: calc(
-    100vh - 60px
-  ); /* 100% of the viewport height minus the 60px navbar */
-  box-sizing: border-box; /* Ensures padding is included in the height calculation */
+  height: calc(100vh - 60px);
+  box-sizing: border-box;
 }
 
 /* --- PAGE BACKGROUND THEMES --- */
-/* Now we define a class for each page's background style. */
 
-/* The default background for pages without a specific theme */
-.default-background {
-  background-color: #f8f9fa; /* A very light, clean grey */
-}
-
-/* Theme for the Dashboard page */
+/* This rule now uses the --bg-image variable passed from the Dashboard component */
 .dashboard-background {
-  background-color: #f4f6f8;
-  /* Use the new, correct path from the public folder */
-  background-image: url("/large20.png");
+  /* It uses var() to access the variable */
+  background-image: var(--bg-image);
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
 }
 
-/* Theme for the Customers pages */
 .customers-background {
-  background-color: #eaf2f8; /* A very light blue */
+  background-color: #eaf2f8;
 }
 
-/* Theme for the Jobs pages */
 .jobs-background {
-  background-color: #e8f6f3; /* A very light green */
+  background-color: #eaf2f8;
 }

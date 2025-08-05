@@ -1,0 +1,26 @@
+/* File: src/components/CustomerListPage.css */
+
+.customer-list-header {
+  display: flex;
+  justify-content: space-between; /* Pushes title to left and button to right */
+  align-items: center;
+  padding: 0 20px; /* Adds some space on the sides */
+  margin-bottom: 20px;
+}
+
+.add-customer-btn {
+  background-color: #27ae60; /* A nice green color */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: none; /* In case we use a Link component */
+  transition: background-color 0.2s ease-in-out;
+}
+
+.add-customer-btn:hover {
+  background-color: #2ecc71; /* A slighter lighter green on hover */
+}

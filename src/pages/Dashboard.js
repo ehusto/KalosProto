@@ -1,13 +1,20 @@
 // File: src/pages/Dashboard.js
 
 import React from "react";
+// --- THIS IS THE NEW IMPORT ---
+import dashboardBgImage from "../large20.png"; // Import the image with a relative path
 
 function Dashboard() {
+  // Create an inline style object whose only job is to set the CSS variable.
+  // The '--bg-image' name is a custom name we just invented.
+  const styleWithCssVar = {
+    "--bg-image": `url(${dashboardBgImage})`,
+  };
+
   return (
-    // We apply two CSS classes to this div:
-    // 1. "page-content": A general class from App.css that gives padding and correct height to all pages.
-    // 2. "dashboard-background": The specific theme class from App.css that applies our faded logo background.
-    <div className="page-content dashboard-background">
+    // We apply the 'page-content' class and a NEW 'dashboard-background' class.
+    // We also apply the inline style to pass the variable to our CSS.
+    <div className="page-content dashboard-background" style={styleWithCssVar}>
       <h2>Welcome to Your Dashboard</h2>
       <p>
         This is the main entry point for your ERP. From here you can navigate to

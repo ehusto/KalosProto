@@ -11,6 +11,7 @@ import Dashboard from "./pages/Dashboard";
 import CustomerListPage from "./pages/customers/CustomerListPage";
 import AddCustomerPage from "./pages/customers/AddCustomerPage";
 import CustomerDetailPage from "./pages/customers/CustomerDetailPage";
+// --- THESE ARE THE MISSING IMPORTS ---
 import JobListPage from "./pages/jobs/JobListPage";
 import AddJobPage from "./pages/jobs/AddJobPage";
 
@@ -22,13 +23,13 @@ function App() {
           <Navbar />
           <main>
             <Routes>
+              {/* The Dashboard route is simple again and needs no props */}
               <Route path="/" element={<Dashboard />} />
+
               <Route path="/customers" element={<CustomerListPage />} />
               <Route path="/customers/new" element={<AddCustomerPage />} />
               <Route path="/customers/:id" element={<CustomerDetailPage />} />
               <Route path="/jobs" element={<JobListPage />} />
-
-              {/* --- THIS IS THE CORRECTED LINE --- */}
               <Route path="/jobs/new" element={<AddJobPage />} />
             </Routes>
           </main>
