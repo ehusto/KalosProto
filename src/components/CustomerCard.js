@@ -1,17 +1,37 @@
 // File: src/components/CustomerCard.js
+
 import React from "react";
 import { Link } from "react-router-dom";
-import "./CustomerCard.css";
+import "./CustomerCard.css"; // Make sure it's pointing to the correct, updated CSS
 
 function CustomerCard({ customer }) {
+  // Defensive check for loading or missing data
+  if (!customer) {
+    return (
+      <div className="customer-card">
+        <div className="customer-card-body">
+          <p>Loading...</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    // --- THIS IS THE KEY CHANGE ---
-    // The link now uses customer._id to build the URL.
+    // The entire card is a link to the customer's detail page
     <Link to={`/customers/${customer._id}`} className="customer-card">
-      <h3>{customer.name}</h3>
-      <p>
-        <strong>Company:</strong> {customer.company}
-      </p>
+      {/* --- THE SWOOP HEADER --- */}
+      {/* The customer's name now goes inside the swoop */}
+      <div className="customer-card-swoop">
+        <h3>{customer.name}</h3>
+      </div>
+
+      {/* --- THE CARD BODY --- */}
+      {/* The phone number is now displayed in the body */}
+      <div className="customer-card-body">
+        <p>
+          <strong>Phone:</strong> {customer.phone || "N/A"}
+        </p>
+      </div>
     </Link>
   );
 }

@@ -2,27 +2,42 @@
 
 const express = require("express");
 const cors = require("cors");
-const client = require("./db.js"); // Your database connection client
+const client = require("./db.js");
 
 const app = express();
 const port = 5001;
 
+// --- Middleware ---
 app.use(cors());
 app.use(express.json());
 
-// This variable will hold our database connection object
+// This variable will hold our database connection
 let db;
 
+// --- Helper function to generate the next Job ID (e.g., K0001) ---
+async function generateNextJobId() {
+  const lastJob = await db
+    .collection("jobs")
+    .findOne({}, { sort: { job_id: -1 } });
+  if (!lastJob || !lastJob.job_id) {
+    return "J0001";
+  }
+  const lastIdNumber = parseInt(lastJob.job_id.substring(1), 10);
+  const nextIdNumber = lastIdNumber + 1;
+  const nextJobId = `J${String(nextIdNumber).padStart(4, "0")}`;
+  return nextJobId;
+}
+
+// --- Main Server Function ---
 async function startServer() {
   try {
     await client.connect();
     console.log("Successfully connected to MongoDB Atlas!");
-    db = client.db("erp_db"); // Sets the 'db' variable for all routes to use
+    db = client.db("erp_db");
 
     // --- API ROUTES ---
 
     // --- CUSTOMER ROUTES ---
-
     app.get("/api/customers", async (req, res) => {
       try {
         const customers = await db.collection("customers").find({}).toArray();
@@ -34,23 +49,21 @@ async function startServer() {
     });
 
     app.post("/api/customers", async (req, res) => {
+      // --- DIAGNOSTIC LOG ---
+      console.log("--- BACKEND: Received POST /api/customers request ---");
+      console.log("Request body:", req.body);
+      // --- END DIAGNOSTIC LOG ---
+
       try {
         const customerData = req.body;
-
         const newCustomer = {
           ...customerData,
-          createdAt: new Date().toISOString(), // Add the new 'createdAt' timestamp
+          createdAt: new Date().toISOString(),
         };
-
-        // --- THIS IS THE CORRECTION ---
-        // We use the 'db' variable that is already defined in this scope.
-        // We do NOT need to call dbo.getDb().
         const result = await db.collection("customers").insertOne(newCustomer);
-
         const createdCustomer = await db
           .collection("customers")
           .findOne({ _id: result.insertedId });
-
         res.status(201).json(createdCustomer);
       } catch (error) {
         console.error("Failed to add customer:", error);
@@ -59,28 +72,26 @@ async function startServer() {
     });
 
     // --- JOB ROUTES ---
-
     app.get("/api/jobs", async (req, res) => {
-      // ... your GET jobs logic will use the 'db' variable here too
+      try {
+        const jobs = await db.collection("jobs").find({}).toArray();
+        res.json(jobs);
+      } catch (error) {
+        console.error("Failed to fetch jobs:", error);
+        res.status(500).json({ message: "Failed to fetch jobs" });
+      }
     });
 
-    // POST a new job
     app.post("/api/jobs", async (req, res) => {
       try {
-        // 1. Get the job data sent from the React form
         const jobData = req.body;
-
-        // --- THIS IS THE NEW PART ---
-        // 2. Create a new object with the form data AND the new timestamp
+        const newJobId = await generateNextJobId();
         const newJob = {
+          job_id: newJobId,
           ...jobData,
           createdAt: new Date().toISOString(),
         };
-
-        // 3. Insert the complete newJob object into the database
         const result = await db.collection("jobs").insertOne(newJob);
-
-        // 4. Find the full document we just created to send back
         const createdJob = await db
           .collection("jobs")
           .findOne({ _id: result.insertedId });

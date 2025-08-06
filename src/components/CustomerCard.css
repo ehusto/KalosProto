@@ -1,17 +1,57 @@
+/* File: src/components/CustomerCard.css */
+
 .customer-card {
-  border: 1px solid #ccc;
+  background-color: white;
   border-radius: 8px;
-  padding: 16px;
   margin: 16px;
-  width: 300px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  /* Make it not look like a default blue link */
-  color: inherit;
+  width: 320px;
+  min-height: 120px; /* Give the card a minimum height */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  color: #333;
   text-decoration: none;
+  position: relative;
+  overflow: hidden;
   transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  display: flex; /* Use flexbox to manage the inner layout */
+  flex-direction: column; /* Stack the swoop header and body vertically */
 }
 
 .customer-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* --- THE SWOOP HEADER --- */
+.customer-card-swoop {
+  /* Let's use a different color for customers - a nice blue */
+  background-image: linear-gradient(to right, #8800ff 40%, black);
+  height: 50px;
+  display: flex;
+  align-items: center;
+  padding-left: 16px;
+  /* A slightly different, smoother swoop */
+  clip-path: polygon(0 0, 100% 0, 100% 60%, 0 100%);
+}
+
+/* Style for the Customer Name text inside the swoop */
+.customer-card-swoop h3 {
+  color: white;
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+/* Container for the rest of the card's content */
+.customer-card-body {
+  padding: 16px;
+  text-align: center; /* Center the text in the body */
+  flex-grow: 1; /* Allow the body to grow and fill available space */
+  display: flex; /* Use flexbox to center the content vertically */
+  align-items: center;
+  justify-content: center;
+}
+
+.customer-card-body p {
+  margin: 0;
+  font-size: 1rem;
 }

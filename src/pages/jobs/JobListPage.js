@@ -1,31 +1,16 @@
 // File: src/pages/jobs/JobListPage.js
 
-import React, { useState, useEffect } from "react"; // <-- IMPORT hooks
+import React from "react";
 import { Link } from "react-router-dom";
-import JobCard from "../../components/JobCard"; // <-- IMPORT the new JobCard
-import "../customers/CustomerListPage.css";
+import { useJobs } from "../../context/JobContext";
+import { useCustomers } from "../../context/CustomerContext";
+import JobCard from "../../components/JobCard"; // Correct path to components folder
+import "../customers/CustomerListPage.css"; // Borrow styles
 
 function JobListPage() {
-  // --- STATE AND DATA FETCHING ---
-  // 1. Create a state variable to hold the list of jobs.
-  const [jobs, setJobs] = useState([]);
+  const { jobs } = useJobs();
+  const { customers } = useCustomers();
 
-  // 2. Use useEffect to fetch the jobs from the API when the page loads.
-  useEffect(() => {
-    const fetchJobs = async () => {
-      try {
-        const response = await fetch("http://localhost:5001/api/jobs");
-        const data = await response.json();
-        setJobs(data); // Update our state with the jobs from the database
-      } catch (error) {
-        console.error("Failed to fetch jobs:", error);
-      }
-    };
-
-    fetchJobs();
-  }, []); // The empty array means this effect runs only once.
-
-  // --- STYLES ---
   const listContainerStyle = {
     display: "flex",
     flexWrap: "wrap",
@@ -40,14 +25,14 @@ function JobListPage() {
           + Add New Job
         </Link>
       </div>
-
-      {/* --- DISPLAY LOGIC --- */}
       <div style={listContainerStyle}>
-        {/* If there are no jobs, show a message. Otherwise, map and display them. */}
         {jobs.length === 0 ? (
           <p>No jobs found. Add one to get started!</p>
         ) : (
-          jobs.map((job) => <JobCard key={job._id} job={job} />)
+          jobs.map((job) => {
+            const customer = customers.find((c) => c._id === job.customer_id);
+            return <JobCard key={job._id} job={job} customer={customer} />;
+          })
         )}
       </div>
     </div>

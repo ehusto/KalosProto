@@ -1,6 +1,12 @@
 // File: src/context/CustomerContext.js
 
-import React, { createContext, useState, useEffect, useContext } from "react";
+import React, {
+  createContext,
+  useState,
+  useEffect,
+  useContext,
+  useMemo,
+} from "react";
 
 const CustomerContext = createContext();
 
@@ -12,12 +18,9 @@ export function CustomerProvider({ children }) {
       try {
         const response = await fetch("http://localhost:5001/api/customers");
         const data = await response.json();
-
-        console.log("CONTEXT: Data successfully fetched from API:", data);
-
         setCustomers(data);
       } catch (error) {
-        console.error("CONTEXT: Failed to fetch customers from API:", error);
+        console.error("CONTEXT: Failed to fetch customers:", error);
       }
     };
     fetchCustomers();
@@ -27,12 +30,13 @@ export function CustomerProvider({ children }) {
     setCustomers((prevCustomers) => [...prevCustomers, newCustomer]);
   };
 
-  const value = {
-    customers,
-    addCustomer,
-  };
-
-  console.log("CONTEXT: Providing this value to children:", value);
+  const value = useMemo(
+    () => ({
+      customers,
+      addCustomer,
+    }),
+    [customers]
+  );
 
   return (
     <CustomerContext.Provider value={value}>

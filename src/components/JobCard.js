@@ -1,50 +1,46 @@
 // File: src/components/JobCard.js
 
 import React from "react";
-// We import Link even though we are not using it yet, preparing for when we build the job detail page.
 import { Link } from "react-router-dom";
-// We can reuse the same CSS as the customer card for a consistent look.
-import "./CustomerCard.css";
+import "./JobCard.css"; // Make sure it's pointing to the new JobCard.css
 
-function JobCard({ job }) {
-  // --- DEFENSIVE PROGRAMMING ---
-  // This approach prevents the component from crashing if a piece of data is missing.
-  // We check if a property exists before we try to format it, providing a default fallback value if it's missing.
+function JobCard({ job, customer }) {
+  // Defensive check for loading state
+  if (!customer || !job) {
+    return (
+      <div className="job-card">
+        <div className="job-card-body">
+          <p>Loading...</p>
+        </div>
+      </div>
+    );
+  }
 
-  // Check if job.scheduled_start_date exists before trying to format it.
-  const startDate = job.scheduled_start_date
-    ? new Date(job.scheduled_start_date).toLocaleTimeString("en-US", {
-        month: "short",
-        day: "numeric",
-        year: "numeric",
-      })
-    : "N/A"; // Fallback to 'N/A' if the date is not present.
-
-  // Check if job.revenue exists and is a number before trying to format it as currency.
-  const revenue =
-    typeof job.revenue === "number" ? `$${job.revenue.toFixed(2)}` : "N/A"; // Fallback to 'N/A' if revenue is not a number.
+  const town = job.job_site_address?.city || "N/A";
 
   return (
-    // For now, this is just a div. Later, we can wrap it in a <Link> to go to a detail page.
-    // Example: <Link to={`/jobs/${job._id}`} className="customer-card"> ... </Link>
-    <div className="customer-card">
-      {/* We'll figure out how to display the customer's name in a later step */}
-      <h3>Job for: [Customer Name]</h3>
+    // The Link is the outer container, using the new class name
+    <Link to={`/jobs/${job._id}`} className="job-card">
+      {/* --- THE SWOOP HEADER --- */}
+      {/* The Job ID now goes inside the swoop */}
+      <div className="job-card-swoop">
+        <h3>{job.job_id || "N/A"}</h3>
+      </div>
 
-      {/* Use the safe variables we created above. Also provide a fallback for other fields. */}
-      <p>
-        <strong>Salesman:</strong> {job.salesman || "N/A"}
-      </p>
-      <p>
-        <strong>Start Date:</strong> {startDate}
-      </p>
-      <p>
-        <strong>Revenue:</strong> {revenue}
-      </p>
-      <p>
-        <em>Customer ID: {job.customer_id || "N/A"}</em>
-      </p>
-    </div>
+      {/* --- THE CARD BODY --- */}
+      {/* The rest of the details go in the body */}
+      <div className="job-card-body">
+        <p>
+          <strong>Customer:</strong> <span>{customer.name}</span>
+        </p>
+        <p>
+          <strong>Salesman:</strong> <span>{job.salesman}</span>
+        </p>
+        <p>
+          <strong>Town:</strong> <span>{town}</span>
+        </p>
+      </div>
+    </Link>
   );
 }
 

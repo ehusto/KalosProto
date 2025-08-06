@@ -2,21 +2,13 @@
 
 import React from "react";
 import { useParams, Link } from "react-router-dom";
-import { useCustomers } from "../../context/CustomerContext"; // <-- IMPORT our custom hook
+import { useCustomers } from "../../context/CustomerContext";
 
-// This component no longer accepts any props.
 function CustomerDetailPage() {
-  // --- THIS IS A KEY CHANGE ---
-  // We get the 'customers' list directly from the context.
   const { customers } = useCustomers();
-
-  // We get the 'id' from the URL parameter, e.g., /customers/some_id_123
   const { id } = useParams();
-
-  // Find the specific customer from the master list whose _id matches the id from the URL.
   const customer = customers.find((c) => c._id === id);
 
-  // If the customer isn't found (e.g., bad URL), show a "not found" message.
   if (!customer) {
     return (
       <div className="page-content customers-background">
@@ -26,7 +18,14 @@ function CustomerDetailPage() {
     );
   }
 
-  // Define some styles just for the white detail card itself.
+  // --- THIS IS THE KEY CHANGE ---
+  // Safely access the address object and its properties.
+  // The "?." is "optional chaining" - it prevents errors if 'address' doesn't exist.
+  const street = customer.address?.street || "N/A";
+  const city = customer.address?.city || "N/A";
+  const state = customer.address?.state || "N/A";
+  const zip = customer.address?.zip || "N/A";
+
   const detailCardStyles = {
     textAlign: "left",
     maxWidth: "600px",
@@ -38,7 +37,6 @@ function CustomerDetailPage() {
   };
 
   return (
-    // Use the global 'page-content' and 'customers-background' classes for the page layout
     <div className="page-content customers-background">
       <div style={detailCardStyles}>
         <h1>{customer.name}</h1>
@@ -51,9 +49,15 @@ function CustomerDetailPage() {
         <p>
           <strong>Phone:</strong> {customer.phone}
         </p>
+
+        {/* --- DISPLAY THE STRUCTURED ADDRESS --- */}
+        <h4>Address</h4>
         <p>
-          <strong>Address:</strong> {customer.address}
+          {street}
+          <br />
+          {city}, {state} {zip}
         </p>
+
         <hr />
         <Link to="/customers">← Back to Customer List</Link>
       </div>

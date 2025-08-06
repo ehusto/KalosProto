@@ -2,54 +2,48 @@
 
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useCustomers } from "../../context/CustomerContext"; // <-- IMPORT our hook to get customers
-import "../customers/AddCustomerPage.css"; // <-- REUSE the CSS from our customer form
+import { useCustomers } from "../../context/CustomerContext";
+import { useJobs } from "../../context/JobContext";
+import "../customers/AddCustomerPage.css";
 
 function AddJobPage() {
   const navigate = useNavigate();
-
-  // --- STATE MANAGEMENT ---
-
-  // 1. Get the list of all customers from our global context.
   const { customers } = useCustomers();
+  const { addJob } = useJobs();
 
-  // 2. Create state variables for each field in our job form.
+  // State for all form fields
   const [salesman, setSalesman] = useState("");
   const [jobSizeSq, setJobSizeSq] = useState("");
   const [scheduledStartDate, setScheduledStartDate] = useState("");
   const [dueDate, setDueDate] = useState("");
   const [revenue, setRevenue] = useState("");
-  // This state will hold the ID of the customer chosen from the dropdown.
   const [selectedCustomerId, setSelectedCustomerId] = useState("");
+  const [street, setStreet] = useState("");
+  const [city, setCity] = useState("");
+  const [state, setState] = useState("");
+  const [zip, setZip] = useState("");
 
-  // --- FORM SUBMISSION ---
   const handleSubmit = async (event) => {
     event.preventDefault();
-
-    // Create the new job object from our state. This is the data we'll send.
     const newJobData = {
       salesman,
-      job_size_sq: parseFloat(jobSizeSq), // Convert string to number
+      job_size_sq: parseFloat(jobSizeSq),
       scheduled_start_date: scheduledStartDate,
       due_date: dueDate,
-      revenue: parseFloat(revenue), // Convert string to number
-      customer_id: selectedCustomerId, // The crucial link to the customer
+      revenue: parseFloat(revenue),
+      customer_id: selectedCustomerId,
+      job_site_address: { street, city, state, zip },
     };
 
     try {
-      // Send the data to our backend's /api/jobs endpoint
       const response = await fetch("http://localhost:5001/api/jobs", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newJobData),
       });
-
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-
-      // We don't need to do anything with the response for now.
-      // Just navigate back to the job list page on success.
+      if (!response.ok) throw new Error("Network response was not ok");
+      const createdJob = await response.json();
+      addJob(createdJob);
       navigate("/jobs");
     } catch (error) {
       console.error("Failed to create job:", error);
@@ -61,7 +55,6 @@ function AddJobPage() {
       <form className="form-container" onSubmit={handleSubmit}>
         <h2>Add a New Job</h2>
 
-        {/* --- CUSTOMER DROPDOWN --- */}
         <div className="form-group">
           <label htmlFor="customer">Customer</label>
           <select
@@ -73,7 +66,6 @@ function AddJobPage() {
             <option value="" disabled>
               -- Select a Customer --
             </option>
-            {/* We map over the customers from our context to create the options */}
             {customers.map((customer) => (
               <option key={customer._id} value={customer._id}>
                 {customer.name} ({customer.company})
@@ -135,6 +127,49 @@ function AddJobPage() {
             value={revenue}
             onChange={(e) => setRevenue(e.target.value)}
             required
+          />
+        </div>
+
+        <hr />
+        <h4>Job Site Address</h4>
+
+        <div className="form-group">
+          <label htmlFor="street">Street</label>
+          <input
+            type="text"
+            id="street"
+            value={street}
+            onChange={(e) => setStreet(e.target.value)}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="city">City</label>
+          {/* --- THIS IS THE CORRECTED LINE --- */}
+          <input
+            type="text"
+            id="city"
+            value={city}
+            onChange={(e) => setCity(e.target.value)}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="state">State</label>
+          <input
+            type="text"
+            id="state"
+            value={state}
+            onChange={(e) => setState(e.target.value)}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="zip">Zip Code</label>
+          <input
+            type="text"
+            id="zip"
+            value={zip}
+            onChange={(e) => setZip(e.target.value)}
           />
         </div>
 

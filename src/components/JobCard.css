@@ -1,0 +1,60 @@
+/* File: src/components/JobCard.css */
+
+.job-card {
+  background-color: white;
+  border-radius: 8px;
+  margin: 16px;
+  width: 320px;
+  min-height: 160px; /* Slightly taller to fit more info */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  color: #333;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  display: flex;
+  flex-direction: column;
+}
+
+.job-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* --- THE SWOOP HEADER --- */
+.job-card-swoop {
+  /* Using the purple/black gradient for jobs */
+  background-image: linear-gradient(to right, #8800ff 40%, black);
+  height: 50px;
+  display: flex;
+  align-items: center;
+  padding-left: 16px;
+  clip-path: polygon(0 0, 100% 0, 100% 60%, 0 100%);
+}
+
+/* Style for the Job ID text inside the swoop */
+.job-card-swoop h3 {
+  color: white;
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+/* Container for the rest of the card's content */
+.job-card-body {
+  padding: 16px;
+  text-align: left; /* Left-align the text in the body */
+  flex-grow: 1;
+}
+
+/* --- KEY CHANGE FOR SPACING --- */
+.job-card-body p {
+  margin: 8px 0; /* Reduced margin between lines */
+  font-size: 0.95rem;
+  display: flex;
+  justify-content: space-between; /* Pushes label to left and value to right */
+}
+
+.job-card-body p strong {
+  margin-right: 8px; /* Add a little space after the label */
+}
