@@ -7,33 +7,24 @@ const client = require("./db.js"); // Your database connection client
 const app = express();
 const port = 5001;
 
-// --- Middleware ---
-// These must come before your routes
 app.use(cors());
 app.use(express.json());
 
-// This variable will hold the database connection object
+// This variable will hold our database connection object
 let db;
 
-// --- Main Server Function ---
-// This function connects to the database and then starts the web server
 async function startServer() {
   try {
-    // 1. Connect to the MongoDB cluster
     await client.connect();
     console.log("Successfully connected to MongoDB Atlas!");
-
-    // 2. Select the database to use. Make sure 'erp_db' is your correct database name.
-    db = client.db("erp_db");
+    db = client.db("erp_db"); // Sets the 'db' variable for all routes to use
 
     // --- API ROUTES ---
 
     // --- CUSTOMER ROUTES ---
 
-    // GET all customers
     app.get("/api/customers", async (req, res) => {
       try {
-        // Ensure 'customers' is the correct name of your collection
         const customers = await db.collection("customers").find({}).toArray();
         res.json(customers);
       } catch (error) {
@@ -42,16 +33,24 @@ async function startServer() {
       }
     });
 
-    // POST a new customer
     app.post("/api/customers", async (req, res) => {
       try {
-        const newCustomer = req.body;
-        // Ensure 'customers' is the correct name of your collection
+        const customerData = req.body;
+
+        const newCustomer = {
+          ...customerData,
+          createdAt: new Date().toISOString(), // Add the new 'createdAt' timestamp
+        };
+
+        // --- THIS IS THE CORRECTION ---
+        // We use the 'db' variable that is already defined in this scope.
+        // We do NOT need to call dbo.getDb().
         const result = await db.collection("customers").insertOne(newCustomer);
-        // Find the full document we just created to get its _id
+
         const createdCustomer = await db
           .collection("customers")
           .findOne({ _id: result.insertedId });
+
         res.status(201).json(createdCustomer);
       } catch (error) {
         console.error("Failed to add customer:", error);
@@ -61,25 +60,27 @@ async function startServer() {
 
     // --- JOB ROUTES ---
 
-    // GET all jobs
     app.get("/api/jobs", async (req, res) => {
-      try {
-        // Ensure 'jobs' is the correct name of your collection
-        const jobs = await db.collection("jobs").find({}).toArray();
-        res.json(jobs);
-      } catch (error) {
-        console.error("Failed to fetch jobs:", error);
-        res.status(500).json({ message: "Failed to fetch jobs" });
-      }
+      // ... your GET jobs logic will use the 'db' variable here too
     });
 
     // POST a new job
     app.post("/api/jobs", async (req, res) => {
       try {
-        const newJob = req.body;
-        // Ensure 'jobs' is the correct name of your collection
+        // 1. Get the job data sent from the React form
+        const jobData = req.body;
+
+        // --- THIS IS THE NEW PART ---
+        // 2. Create a new object with the form data AND the new timestamp
+        const newJob = {
+          ...jobData,
+          createdAt: new Date().toISOString(),
+        };
+
+        // 3. Insert the complete newJob object into the database
         const result = await db.collection("jobs").insertOne(newJob);
-        // Find the full document we just created to get its _id
+
+        // 4. Find the full document we just created to send back
         const createdJob = await db
           .collection("jobs")
           .findOne({ _id: result.insertedId });
@@ -91,12 +92,10 @@ async function startServer() {
     });
 
     // --- Start Listening ---
-    // 3. Start the Express server only AFTER the database connection is successful
     app.listen(port, () => {
       console.log(`Backend server is running on http://localhost:${port}`);
     });
   } catch (err) {
-    // If the database connection fails, log the error and exit
     console.error("Failed to connect to the database", err);
     process.exit(1);
   }
