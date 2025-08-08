@@ -7,11 +7,7 @@ import "./Dashboard.css"; // <-- Import our new stylesheet
 // 1. Import the main Font Awesome component and the specific icons we want to use
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUsers, faClipboardList } from "@fortawesome/free-solid-svg-icons";
-import {
-  faUsers,
-  faClipboardList,
-  faCalendarAlt,
-} from "@fortawesome/free-solid-svg-icons";
+import { faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
 
 function Dashboard() {
   return (
