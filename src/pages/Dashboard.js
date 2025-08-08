@@ -1,25 +1,41 @@
 // File: src/pages/Dashboard.js
 
 import React from "react";
-// --- THIS IS THE NEW IMPORT ---
-import dashboardBgImage from "../large20.png"; // Import the image with a relative path
+import { Link } from "react-router-dom";
+import "./Dashboard.css"; // <-- Import our new stylesheet
+
+// 1. Import the main Font Awesome component and the specific icons we want to use
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUsers, faClipboardList } from "@fortawesome/free-solid-svg-icons";
 
 function Dashboard() {
-  // Create an inline style object whose only job is to set the CSS variable.
-  // The '--bg-image' name is a custom name we just invented.
-  const styleWithCssVar = {
-    "--bg-image": `url(${dashboardBgImage})`,
-  };
-
   return (
-    // We apply the 'page-content' class and a NEW 'dashboard-background' class.
-    // We also apply the inline style to pass the variable to our CSS.
-    <div className="page-content dashboard-background" style={styleWithCssVar}>
-      <h2>Welcome to Your Dashboard</h2>
-      <p>
-        This is the main entry point for your ERP. From here you can navigate to
-        different modules.
-      </p>
+    // We use the global 'page-content' class and the dashboard-background theme
+    <div className="page-content dashboard-background">
+      {/* This is our new grid container */}
+      <div className="dashboard-grid">
+        {/* --- App Icon 1: Customers --- */}
+        <Link to="/customers" className="dashboard-app-link">
+          {/* We render the FontAwesomeIcon component with the 'faUsers' icon */}
+          <FontAwesomeIcon icon={faUsers} className="app-icon" />
+          <span className="app-title">Customers</span>
+        </Link>
+
+        {/* --- App Icon 2: Jobs --- */}
+        <Link to="/jobs" className="dashboard-app-link">
+          {/* We render the FontAwesomeIcon component with the 'faClipboardList' icon */}
+          <FontAwesomeIcon icon={faClipboardList} className="app-icon" />
+          <span className="app-title">Jobs</span>
+        </Link>
+
+        {/* --- Add More App Icons Here as You Build More Modules --- */}
+        {/* 
+        <Link to="/inventory" className="dashboard-app-link">
+          <FontAwesomeIcon icon={faBoxOpen} className="app-icon" />
+          <span className="app-title">Inventory</span>
+        </Link>
+        */}
+      </div>
     </div>
   );
 }

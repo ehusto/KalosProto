@@ -1,0 +1,49 @@
+/* File: src/pages/Dashboard.css */
+
+/* The main container for our grid of icons */
+.dashboard-grid {
+  display: flex;
+  flex-wrap: wrap; /* Allows icons to wrap to the next line on smaller screens */
+  justify-content: center; /* Center the icons horizontally */
+  align-items: center;
+  gap: 2rem; /* The space between the icons */
+  padding-top: 4rem; /* Push the icons down from the navbar a bit */
+}
+
+/* Styling for each individual "app" icon link */
+.dashboard-app-link {
+  display: flex;
+  flex-direction: column; /* Stack the icon and title vertically */
+  align-items: center;
+  justify-content: center;
+
+  width: 150px;
+  height: 150px;
+
+  background-color: white;
+  color: #2c3e50; /* Dark text color */
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1.1rem;
+
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.dashboard-app-link:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+  color: #8800ff; /* Use your purple theme color on hover */
+}
+
+/* Styling for the icon itself */
+.app-icon {
+  font-size: 3rem; /* Make the icon large */
+  margin-bottom: 1rem; /* Space between the icon and the title */
+}
+
+/* Styling for the text title below the icon */
+.app-title {
+  display: block;
+}
