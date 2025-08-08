@@ -19,6 +19,7 @@ import CustomerDetailPage from "./pages/customers/CustomerDetailPage";
 import JobListPage from "./pages/jobs/JobListPage";
 import AddJobPage from "./pages/jobs/AddJobPage";
 import JobDetailPage from "./pages/jobs/JobDetailPage"; // This path must match the file system
+import CalendarPage from "./pages/CalendarPage";
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
                 <Route path="/jobs" element={<JobListPage />} />
                 <Route path="/jobs/new" element={<AddJobPage />} />
                 <Route path="/jobs/:id" element={<JobDetailPage />} />
+                <Route path="/calendar" element={<CalendarPage />} />
               </Routes>
             </main>
           </div>

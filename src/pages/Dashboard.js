@@ -7,6 +7,11 @@ import "./Dashboard.css"; // <-- Import our new stylesheet
 // 1. Import the main Font Awesome component and the specific icons we want to use
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUsers, faClipboardList } from "@fortawesome/free-solid-svg-icons";
+import {
+  faUsers,
+  faClipboardList,
+  faCalendarAlt,
+} from "@fortawesome/free-solid-svg-icons";
 
 function Dashboard() {
   return (
@@ -26,6 +31,12 @@ function Dashboard() {
           {/* We render the FontAwesomeIcon component with the 'faClipboardList' icon */}
           <FontAwesomeIcon icon={faClipboardList} className="app-icon" />
           <span className="app-title">Jobs</span>
+        </Link>
+
+        {/* --- App Icon 3: Calender --- */}
+        <Link to="/calendar" className="dashboard-app-link">
+          <FontAwesomeIcon icon={faCalendarAlt} className="app-icon" />
+          <span className="app-title">Calendar</span>
         </Link>
 
         {/* --- Add More App Icons Here as You Build More Modules --- */}
