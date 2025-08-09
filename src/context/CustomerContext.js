@@ -30,13 +30,7 @@ export function CustomerProvider({ children }) {
     setCustomers((prevCustomers) => [...prevCustomers, newCustomer]);
   };
 
-  const value = useMemo(
-    () => ({
-      customers,
-      addCustomer,
-    }),
-    [customers]
-  );
+  const value = useMemo(() => ({ customers, addCustomer }), [customers]);
 
   return (
     <CustomerContext.Provider value={value}>

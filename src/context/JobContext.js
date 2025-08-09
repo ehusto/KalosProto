@@ -30,13 +30,7 @@ export function JobProvider({ children }) {
     setJobs((prevJobs) => [...prevJobs, newJob]);
   };
 
-  const value = useMemo(
-    () => ({
-      jobs,
-      addJob,
-    }),
-    [jobs]
-  );
+  const value = useMemo(() => ({ jobs, addJob }), [jobs]);
 
   return <JobContext.Provider value={value}>{children}</JobContext.Provider>;
 }

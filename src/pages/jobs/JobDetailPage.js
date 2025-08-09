@@ -58,6 +58,21 @@ function JobDetailPage() {
     <div className="page-content jobs-background">
       <div style={detailCardStyles}>
         <h1>Job Details: {job.job_id}</h1>
+
+        {/* --- ADDED THIS SECTION --- */}
+        {job.originating_rfq_id && (
+          <p
+            style={{
+              fontWeight: "bold",
+              color: "#7f8c8d",
+              marginTop: "-10px",
+              marginBottom: "20px",
+            }}
+          >
+            Generated from RFQ: {job.originating_rfq_id}
+          </p>
+        )}
+
         <hr />
         <h4>Customer Information</h4>
         <p>

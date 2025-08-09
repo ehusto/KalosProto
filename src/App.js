@@ -4,45 +4,55 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { CustomerProvider } from "./context/CustomerContext";
 import { JobProvider } from "./context/JobContext";
+import { RfqProvider } from "./context/RfqContext";
 import "./App.css";
 
-// --- Shared Components ---
+// Import all page components from their correct locations
 import Navbar from "./components/Navbar";
-
-// --- Page Components ---
 import Dashboard from "./pages/Dashboard";
-// Customer Pages
 import CustomerListPage from "./pages/customers/CustomerListPage";
-import AddCustomerPage from "./pages/customers/AddCustomerPage";
+import AddCustomerPage from "./pages/customers/AddCustomerPage"; // <-- CORRECTED PATH
 import CustomerDetailPage from "./pages/customers/CustomerDetailPage";
-// Job Pages
 import JobListPage from "./pages/jobs/JobListPage";
 import AddJobPage from "./pages/jobs/AddJobPage";
-import JobDetailPage from "./pages/jobs/JobDetailPage"; // This path must match the file system
+import JobDetailPage from "./pages/jobs/JobDetailPage";
 import CalendarPage from "./pages/CalendarPage";
+import RfqListPage from "./pages/rfqs/RfqListPage";
+import AddRfqPage from "./pages/rfqs/AddRfqPage";
+import RfqDetailPage from "./pages/rfqs/RfqDetailPage";
+import RfqArchivePage from "./pages/rfqs/RfqArchivePage";
 
 function App() {
   return (
     <CustomerProvider>
       <JobProvider>
-        <Router>
-          <div className="App">
-            <Navbar />
-            <main>
-              <Routes>
-                {/* All routes use the components imported above */}
-                <Route path="/" element={<Dashboard />} />
-                <Route path="/customers" element={<CustomerListPage />} />
-                <Route path="/customers/new" element={<AddCustomerPage />} />
-                <Route path="/customers/:id" element={<CustomerDetailPage />} />
-                <Route path="/jobs" element={<JobListPage />} />
-                <Route path="/jobs/new" element={<AddJobPage />} />
-                <Route path="/jobs/:id" element={<JobDetailPage />} />
-                <Route path="/calendar" element={<CalendarPage />} />
-              </Routes>
-            </main>
-          </div>
-        </Router>
+        <RfqProvider>
+          <Router>
+            <div className="App">
+              <Navbar />
+              <main>
+                <Routes>
+                  <Route path="/" element={<Dashboard />} />
+                  <Route path="/customers" element={<CustomerListPage />} />
+                  <Route path="/customers/new" element={<AddCustomerPage />} />
+                  <Route
+                    path="/customers/:id"
+                    element={<CustomerDetailPage />}
+                  />
+                  <Route path="/jobs" element={<JobListPage />} />
+                  <Route path="/jobs/new" element={<AddJobPage />} />
+                  <Route path="/jobs/:id" element={<JobDetailPage />} />
+                  <Route path="/calendar" element={<CalendarPage />} />
+                  <Route path="/rfqs" element={<RfqListPage />} />
+                  <Route path="/rfqs/new" element={<AddRfqPage />} />
+                  {/* The order of these last two routes is important! */}
+                  <Route path="/rfqs/archive" element={<RfqArchivePage />} />
+                  <Route path="/rfqs/:id" element={<RfqDetailPage />} />
+                </Routes>
+              </main>
+            </div>
+          </Router>
+        </RfqProvider>
       </JobProvider>
     </CustomerProvider>
   );
