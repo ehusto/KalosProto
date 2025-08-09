@@ -1,31 +1,35 @@
 // File: src/components/Navbar.js
 
-// --- IMPORTS go at the top ---
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import SearchPalette from "./SearchPalette";
+import JobFilterDropdown from "./JobFilterDropdown";
 import "./Navbar.css";
 
-// --- FUNCTION DEFINITION starts here ---
-// The 'return' statement MUST be inside these curly braces.
 function Navbar() {
-  // The 'return' statement with the JSX for the component.
+  const location = useLocation();
+
   return (
     <nav className="navbar">
+      {/* The brand logo now serves as the primary "home" button */}
       <Link to="/" className="navbar-brand">
         Kalos Exteriors
       </Link>
 
+      <div className="navbar-center">
+        <SearchPalette />
+      </div>
+
+      {location.pathname === "/jobs" && <JobFilterDropdown />}
+
+      {/* The entire <ul> for the right-side links can now be removed,
+          or kept empty if you plan to add other links later (like a "Log Out" button).
+          Let's remove it for maximum cleanliness. */}
       <ul className="navbar-nav">
-        {/* Only the Dashboard link remains */}
-        <li className="nav-item">
-          <Link to="/" className="nav-link">
-            Dashboard
-          </Link>
-        </li>
+        {/* The <li> for the "Dashboard" link has been deleted. */}
       </ul>
     </nav>
   );
-} // --- FUNCTION DEFINITION ends here ---
+}
 
-// --- EXPORT statement goes at the bottom ---
 export default Navbar;

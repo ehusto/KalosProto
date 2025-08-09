@@ -1,57 +1,74 @@
-/* Main container for the navbar */
+/* File: src/components/Navbar.css */
+
+/*
+  Main container for the navbar. We use Flexbox to align items in a row.
+*/
 .navbar {
-  display: flex; /* Use flexbox to align items in a row */
-  justify-content: space-between; /* Pushes brand to the left and links to the right */
-  align-items: center; /* Vertically centers the content */
-  background-image: linear-gradient(
-    to right,
-    black 15%,
-    #8800ff
-  ); /* A nice dark blue/grey background */
-  padding: 0 20px; /* Add some padding on the left and right */
+  display: flex;
+  align-items: center; /* Vertically align all items */
+  background-image: linear-gradient(to right, black 15%, #8800ff);
+  padding: 0 20px;
   color: white;
   height: 60px;
 }
 
-/* Styling for the main brand/logo */
+/* 
+  The brand/logo on the left.
+*/
 .navbar-brand {
-  font-size: 1.5rem; /* Make the brand text bigger */
+  font-size: 1.5rem;
   font-weight: bold;
   color: white;
-  text-decoration: none; /* Remove the default underline from links */
+  text-decoration: none;
+  margin-right: 2rem; /* Add some space to its right */
 }
 
-/* This holds the list of navigation links */
+/* 
+  The central container for the search bar. 
+  'flex-grow: 1' is the key property that tells this element to expand
+  and take up all available empty space in the middle.
+*/
+.navbar-center {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center; /* Center the search bar within this flexible space */
+}
+
+/*
+  This container for the right-side links is now mostly a placeholder,
+  but 'margin-left: auto' is the trick that pushes it to the far right.
+*/
 .navbar-nav {
-  list-style: none; /* Remove the default bullet points from the list */
-  display: flex; /* Make the list items sit in a row */
-  margin: 0;
+  list-style: none;
+  display: flex;
+  margin: 0 0 0 auto;
   padding: 0;
 }
 
-/* A single navigation item */
+/* 
+  We keep these styles in case you add a "Log Out" button or other
+  links back to the navbar in the future.
+*/
 .nav-item {
-  margin-left: 20px; /* Add some space between the links */
+  margin-left: 20px;
 }
 
-/* The actual navigation link text */
 .nav-link {
   color: white;
-  text-decoration: none; /* Remove the underline */
+  text-decoration: none;
   font-size: 1rem;
   padding: 8px 12px;
   border-radius: 5px;
-  transition: background-color 0.2s ease-in-out; /* Smooth transition for hover effect */
+  transition: background-color 0.2s ease-in-out;
 }
 
-/* This style applies when you hover your mouse over a link */
 .nav-link:hover {
-  background-color: black; /* A slightly lighter shade for the hover effect */
+  background-color: black;
 }
 
-/* Add this new rule to the bottom of Navbar.css */
+/* Removes the default browser outline on focused links for a cleaner look */
 .navbar-brand:focus,
-.navbar-link:focus {
-  outline: none; /* Removes the default outline */
-  box-shadow: none; /* Some browsers use box-shadow for focus, so we remove that too */
+.nav-link:focus {
+  outline: none;
+  box-shadow: none;
 }

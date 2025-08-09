@@ -5,13 +5,15 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { CustomerProvider } from "./context/CustomerContext";
 import { JobProvider } from "./context/JobContext";
 import { RfqProvider } from "./context/RfqContext";
+import { MeasurementProvider } from "./context/MeasurementContext";
+import { FilterProvider } from "./context/FilterContext"; // <-- IMPORT THE MISSING PROVIDER
 import "./App.css";
 
-// Import all page components from their correct locations
+// Import all page components
 import Navbar from "./components/Navbar";
 import Dashboard from "./pages/Dashboard";
 import CustomerListPage from "./pages/customers/CustomerListPage";
-import AddCustomerPage from "./pages/customers/AddCustomerPage"; // <-- CORRECTED PATH
+import AddCustomerPage from "./pages/customers/AddCustomerPage";
 import CustomerDetailPage from "./pages/customers/CustomerDetailPage";
 import JobListPage from "./pages/jobs/JobListPage";
 import AddJobPage from "./pages/jobs/AddJobPage";
@@ -24,34 +26,45 @@ import RfqArchivePage from "./pages/rfqs/RfqArchivePage";
 
 function App() {
   return (
+    // We wrap all the providers at the top level of the application
     <CustomerProvider>
       <JobProvider>
         <RfqProvider>
-          <Router>
-            <div className="App">
-              <Navbar />
-              <main>
-                <Routes>
-                  <Route path="/" element={<Dashboard />} />
-                  <Route path="/customers" element={<CustomerListPage />} />
-                  <Route path="/customers/new" element={<AddCustomerPage />} />
-                  <Route
-                    path="/customers/:id"
-                    element={<CustomerDetailPage />}
-                  />
-                  <Route path="/jobs" element={<JobListPage />} />
-                  <Route path="/jobs/new" element={<AddJobPage />} />
-                  <Route path="/jobs/:id" element={<JobDetailPage />} />
-                  <Route path="/calendar" element={<CalendarPage />} />
-                  <Route path="/rfqs" element={<RfqListPage />} />
-                  <Route path="/rfqs/new" element={<AddRfqPage />} />
-                  {/* The order of these last two routes is important! */}
-                  <Route path="/rfqs/archive" element={<RfqArchivePage />} />
-                  <Route path="/rfqs/:id" element={<RfqDetailPage />} />
-                </Routes>
-              </main>
-            </div>
-          </Router>
+          <MeasurementProvider>
+            {/* --- THIS IS THE MISSING PROVIDER --- */}
+            <FilterProvider>
+              <Router>
+                <div className="App">
+                  <Navbar />
+                  <main>
+                    <Routes>
+                      <Route path="/" element={<Dashboard />} />
+                      <Route path="/customers" element={<CustomerListPage />} />
+                      <Route
+                        path="/customers/new"
+                        element={<AddCustomerPage />}
+                      />
+                      <Route
+                        path="/customers/:id"
+                        element={<CustomerDetailPage />}
+                      />
+                      <Route path="/jobs" element={<JobListPage />} />
+                      <Route path="/jobs/new" element={<AddJobPage />} />
+                      <Route path="/jobs/:id" element={<JobDetailPage />} />
+                      <Route path="/calendar" element={<CalendarPage />} />
+                      <Route path="/rfqs" element={<RfqListPage />} />
+                      <Route path="/rfqs/new" element={<AddRfqPage />} />
+                      <Route
+                        path="/rfqs/archive"
+                        element={<RfqArchivePage />}
+                      />
+                      <Route path="/rfqs/:id" element={<RfqDetailPage />} />
+                    </Routes>
+                  </main>
+                </div>
+              </Router>
+            </FilterProvider>
+          </MeasurementProvider>
         </RfqProvider>
       </JobProvider>
     </CustomerProvider>

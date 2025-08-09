@@ -6,7 +6,7 @@ import { useJobs } from "../../context/JobContext";
 import { useCustomers } from "../../context/CustomerContext";
 
 function JobDetailPage() {
-  const { jobs } = useJobs();
+  const { jobs, updateJob } = useJobs(); // Get the new updateJob function
   const { customers } = useCustomers();
   const { id } = useParams();
 
@@ -30,6 +30,16 @@ function JobDetailPage() {
   }
 
   const customer = customers.find((c) => c._id === job.customer_id);
+
+  const handleStatusUpdate = (newStatus) => {
+    if (
+      window.confirm(
+        `Are you sure you want to change the status to "${newStatus}"?`
+      )
+    ) {
+      updateJob(job._id, { status: newStatus });
+    }
+  };
 
   const startDate = job.scheduled_start_date
     ? new Date(job.scheduled_start_date).toLocaleDateString()
@@ -58,8 +68,6 @@ function JobDetailPage() {
     <div className="page-content jobs-background">
       <div style={detailCardStyles}>
         <h1>Job Details: {job.job_id}</h1>
-
-        {/* --- ADDED THIS SECTION --- */}
         {job.originating_rfq_id && (
           <p
             style={{
@@ -72,7 +80,9 @@ function JobDetailPage() {
             Generated from RFQ: {job.originating_rfq_id}
           </p>
         )}
-
+        <p>
+          <strong>Status:</strong> {job.status || "Scheduled"}
+        </p>
         <hr />
         <h4>Customer Information</h4>
         <p>
@@ -103,6 +113,69 @@ function JobDetailPage() {
           <br />
           {city}, {state} {zip}
         </p>
+        <hr />
+
+        <h4>Actions</h4>
+        <div>
+          {job.status === "Scheduled" && (
+            <button
+              onClick={() => handleStatusUpdate("In Progress")}
+              className="add-customer-btn"
+            >
+              Start Job
+            </button>
+          )}
+          {(job.status === "In Progress" ||
+            job.status === "Pending Materials") && (
+            <>
+              <button
+                onClick={() => handleStatusUpdate("Completed")}
+                className="add-customer-btn"
+              >
+                Complete Job
+              </button>
+              <button
+                onClick={() => handleStatusUpdate("On Hold")}
+                className="add-customer-btn"
+                style={{ backgroundColor: "#f39c12", marginLeft: "10px" }}
+              >
+                Put on Hold
+              </button>
+            </>
+          )}
+          {job.status === "On Hold" && (
+            <button
+              onClick={() => handleStatusUpdate("In Progress")}
+              className="add-customer-btn"
+            >
+              Resume Job
+            </button>
+          )}
+          {job.status === "Completed" && (
+            <button
+              onClick={() => handleStatusUpdate("Invoiced")}
+              className="add-customer-btn"
+              style={{ backgroundColor: "#3498db" }}
+            >
+              Send Final Invoice
+            </button>
+          )}
+          {job.status === "Invoiced" && (
+            <button
+              onClick={() => handleStatusUpdate("Paid in Full")}
+              className="add-customer-btn"
+              style={{ backgroundColor: "#27ae60" }}
+            >
+              Mark as Paid
+            </button>
+          )}
+          {job.status === "Paid in Full" && (
+            <p style={{ color: "#27ae60", fontWeight: "bold" }}>
+              ✓ This job is complete and paid.
+            </p>
+          )}
+        </div>
+
         <hr />
         <Link to="/jobs">← Back to Job List</Link>
       </div>
