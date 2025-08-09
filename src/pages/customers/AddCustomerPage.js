@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useCustomers } from "../../context/CustomerContext";
-import InputMask from "react-input-mask"; // <-- IMPORT THE NEW COMPONENT
+import { IMaskInput } from "react-imask"; // <-- IMPORT THE NEW COMPONENT
 import "./AddCustomerPage.css";
 
 function AddCustomerPage() {
@@ -13,7 +13,7 @@ function AddCustomerPage() {
   const [name, setName] = useState("");
   const [company, setCompany] = useState("");
   const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState(""); // This state will now hold the formatted string
+  const [phone, setPhone] = useState(""); // This will hold the unmasked value
   const [street, setStreet] = useState("");
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
@@ -25,7 +25,7 @@ function AddCustomerPage() {
       name,
       company,
       email,
-      phone, // Send the formatted phone number to the backend
+      phone, // Send the clean, unmasked phone number
       address: { street, city, state, zip },
     };
 
@@ -80,22 +80,58 @@ function AddCustomerPage() {
           />
         </div>
 
-        {/* --- THIS IS THE REPLACEMENT --- */}
+        {/* --- THIS IS THE NEW, WORKING MASKED INPUT --- */}
         <div className="form-group">
           <label htmlFor="phone">Phone</label>
-          <InputMask
-            mask="(999) 999-9999" // This defines the input format
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
-            className="form-control" // Use a generic class for styling
-          >
-            {(inputProps) => <input {...inputProps} type="tel" id="phone" />}
-          </InputMask>
+          <IMaskInput
+            mask="(000) 000-0000" // Use 0 as a digit placeholder
+            unmask={true} // This is key: the value returned to onAccept will be the raw numbers
+            id="phone"
+            className="form-control" // Use our existing style
+            placeholder="(123) 456-7890"
+            onAccept={(value) => setPhone(value)} // Use onAccept for unmasked value
+          />
         </div>
 
         <hr />
         <h4>Customer Address</h4>
-        {/* ... (Address inputs are the same) ... */}
+
+        <div className="form-group">
+          <label htmlFor="street">Street</label>
+          <input
+            type="text"
+            id="street"
+            value={street}
+            onChange={(e) => setStreet(e.target.value)}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="city">City</label>
+          <input
+            type="text"
+            id="city"
+            value={city}
+            onChange={(e) => setCity(e.target.value)}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="state">State</label>
+          <input
+            type="text"
+            id="state"
+            value={state}
+            onChange={(e) => setState(e.target.value)}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="zip">Zip Code</label>
+          <input
+            type="text"
+            id="zip"
+            value={zip}
+            onChange={(e) => setZip(e.target.value)}
+          />
+        </div>
 
         <div className="form-actions">
           <button type="submit" className="add-customer-btn">
