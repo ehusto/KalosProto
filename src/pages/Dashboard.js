@@ -2,16 +2,15 @@
 
 import React from "react";
 import { Link } from "react-router-dom";
-import "./Dashboard.css"; // The stylesheet for the icon grid
+import "./Dashboard.css";
 
-// Import the main Font Awesome component
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// Import all the specific icons we need from a single line
 import {
   faUsers,
   faClipboardList,
   faCalendarAlt,
   faFileInvoice,
+  faRulerCombined,
 } from "@fortawesome/free-solid-svg-icons";
 
 function Dashboard() {
@@ -42,6 +41,12 @@ function Dashboard() {
         <Link to="/rfqs" className="dashboard-app-link">
           <FontAwesomeIcon icon={faFileInvoice} className="app-icon" />
           <span className="app-title">RFQs</span>
+        </Link>
+
+        {/* --- App Icon 5: BOM --- */}
+        <Link to="/measurements" className="dashboard-app-link">
+          <FontAwesomeIcon icon={faRulerCombined} className="app-icon" />
+          <span className="app-title">Measurements</span>
         </Link>
       </div>
     </div>

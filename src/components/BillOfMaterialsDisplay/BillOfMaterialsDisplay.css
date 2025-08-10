@@ -1,0 +1,22 @@
+/* File: src/components/BillOfMaterialsDisplay/BillOfMaterialsDisplay.css */
+.bom-container {
+  margin-top: 1rem;
+}
+.bom-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.bom-table th,
+.bom-table td {
+  border: 1px solid #ddd;
+  padding: 10px 12px;
+  text-align: left;
+  vertical-align: middle;
+}
+.bom-table th {
+  background-color: #f8f9fa;
+  font-weight: bold;
+}
+.bom-table tbody tr:nth-child(even) {
+  background-color: #f8f9fa;
+}

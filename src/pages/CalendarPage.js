@@ -1,23 +1,25 @@
 // File: src/pages/CalendarPage.js
 
-import React from "react";
+import React, { useState } from "react";
 import { useJobs } from "../context/JobContext";
 import { useCustomers } from "../context/CustomerContext";
 import { useNavigate } from "react-router-dom";
+// --- THIS IS THE CORRECTED IMPORT PATH ---
+import EventDetailModal from "../components/EventDetailModal/EventDetailModal";
 
-// --- FULLCALENDAR JAVASCRIPT IMPORTS (These are correct) ---
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 
-// --- CSS IMPORTS HAVE BEEN REMOVED ---
-// The styles are now loaded globally from index.html
+// The CSS for FullCalendar is correctly loaded in your public/index.html
 
 function CalendarPage() {
   const { jobs } = useJobs();
   const { customers } = useCustomers();
   const navigate = useNavigate();
 
-  // Transform our job data into the "event" format FullCalendar needs
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedJob, setSelectedJob] = useState(null);
+
   const events = jobs.map((job) => {
     const customer = customers.find((c) => c._id === job.customer_id);
     const customerName = customer ? customer.name : "Unknown";
@@ -28,10 +30,22 @@ function CalendarPage() {
     };
   });
 
-  // Navigate to the job's detail page when an event is clicked
   const handleEventClick = (clickInfo) => {
-    navigate(`/jobs/${clickInfo.event.id}`);
+    const job = jobs.find((j) => j._id === clickInfo.event.id);
+    if (job) {
+      setSelectedJob(job);
+      setIsModalOpen(true);
+    }
   };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setSelectedJob(null);
+  };
+
+  const selectedCustomer = customers.find(
+    (c) => c._id === selectedJob?.customer_id
+  );
 
   return (
     <div className="page-content default-background">
@@ -42,13 +56,13 @@ function CalendarPage() {
           backgroundColor: "white",
           padding: "2rem",
           borderRadius: "8px",
-          boxShadow: "0 4.2px 12px rgba(0,0,0,0.08)",
+          boxShadow: "0 4px 12px rgba(0,0,0,0.08)",
+          position: "relative",
         }}
       >
         <FullCalendar
           plugins={[dayGridPlugin]}
           initialView="dayGridMonth"
-          weekends={true}
           events={events}
           eventClick={handleEventClick}
           headerToolbar={{
@@ -58,6 +72,14 @@ function CalendarPage() {
           }}
         />
       </div>
+
+      {isModalOpen && (
+        <EventDetailModal
+          job={selectedJob}
+          customer={selectedCustomer}
+          onClose={handleCloseModal}
+        />
+      )}
     </div>
   );
 }

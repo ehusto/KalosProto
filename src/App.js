@@ -23,6 +23,7 @@ import RfqListPage from "./pages/rfqs/RfqListPage";
 import AddRfqPage from "./pages/rfqs/AddRfqPage";
 import RfqDetailPage from "./pages/rfqs/RfqDetailPage";
 import RfqArchivePage from "./pages/rfqs/RfqArchivePage";
+import MeasurementListPage from "./pages/measurements/MeasurementListPage";
 
 function App() {
   return (
@@ -31,7 +32,6 @@ function App() {
       <JobProvider>
         <RfqProvider>
           <MeasurementProvider>
-            {/* --- THIS IS THE MISSING PROVIDER --- */}
             <FilterProvider>
               <Router>
                 <div className="App">
@@ -59,6 +59,10 @@ function App() {
                         element={<RfqArchivePage />}
                       />
                       <Route path="/rfqs/:id" element={<RfqDetailPage />} />
+                      <Route
+                        path="/measurements"
+                        element={<MeasurementListPage />}
+                      />
                     </Routes>
                   </main>
                 </div>

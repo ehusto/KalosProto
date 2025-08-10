@@ -4,9 +4,10 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useCustomers } from "../../context/CustomerContext";
 import { useJobs } from "../../context/JobContext";
-import { useRfqs } from "../../context/RfqContext";
+import { useRfqs } from "../../context/RfqContext"; // We need the RFQ update function
 import "../../pages/customers/AddCustomerPage.css";
 
+// Custom hook to read URL query parameters
 function useQuery() {
   return new URLSearchParams(useLocation().search);
 }
@@ -15,10 +16,10 @@ function AddJobPage() {
   const navigate = useNavigate();
   const query = useQuery();
   const { customers } = useCustomers();
-  const { addJob } = useJobs();
-  const { rfqs, updateRfq } = useRfqs();
+  const { addJob } = useJobs(); // Get the addJob function
+  const { rfqs, updateRfq } = useRfqs(); // Get the updateRfq function
 
-  // State for all form fields
+  // --- State for all form fields ---
   const [salesman, setSalesman] = useState("");
   const [jobSizeSq, setJobSizeSq] = useState("");
   const [scheduledStartDate, setScheduledStartDate] = useState("");
@@ -53,7 +54,7 @@ function AddJobPage() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const rfqIdFromUrl = query.get("rfqId");
+    const rfqIdFromUrl = query.get("rfqId"); // This is the MongoDB _id
     const newJobData = {
       salesman,
       job_size_sq: parseFloat(jobSizeSq) || 0,
@@ -65,37 +66,28 @@ function AddJobPage() {
       originating_rfq_id: originatingRfqId,
     };
 
-    console.log("FRONTEND: Submitting new job data:", newJobData);
-
     try {
       const response = await fetch("http://localhost:5001/api/jobs", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newJobData),
       });
+      if (!response.ok) throw new Error("Network response was not ok");
 
-      if (!response.ok) {
-        const errorText = await response.text();
-        throw new Error(`Network response was not ok: ${errorText}`);
-      }
-
-      console.log("FRONTEND: Fetch successful, attempting to parse JSON...");
       const createdJob = await response.json();
-      console.log("FRONTEND: JSON parsed successfully:", createdJob);
 
+      // Update the JobContext with the new job
       addJob(createdJob);
 
+      // If this came from an RFQ, update the RFQ's status in the RFQContext
       if (rfqIdFromUrl) {
         updateRfq(rfqIdFromUrl, { status: "Job Created" });
       }
 
-      console.log(
-        "FRONTEND: Navigating to job detail page:",
-        `/jobs/${createdJob._id}`
-      );
+      // Navigate to the new job's detail page
       navigate(`/jobs/${createdJob._id}`);
     } catch (error) {
-      console.error("FRONTEND: Failed to create job:", error);
+      console.error("Failed to create job:", error);
     }
   };
 

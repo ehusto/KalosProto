@@ -11,6 +11,7 @@ const RfqContext = createContext();
 
 export function RfqProvider({ children }) {
   const [rfqs, setRfqs] = useState([]);
+
   useEffect(() => {
     const fetchRfqs = async () => {
       try {
@@ -24,25 +25,32 @@ export function RfqProvider({ children }) {
     fetchRfqs();
   }, []);
 
-  // This is the function for adding a new RFQ to the state
   const addRfq = (newRfq) => {
     setRfqs((prevRfqs) => [...prevRfqs, newRfq]);
   };
 
-  // This is the function for updating an existing RFQ
   const updateRfq = async (rfqId, updateData) => {
     try {
-      await fetch(`http://localhost:5001/api/rfqs/${rfqId}`, {
+      const response = await fetch(`http://localhost:5001/api/rfqs/${rfqId}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(updateData),
       });
+      if (!response.ok) throw new Error("Update failed on server");
+
+      // We re-fetch the single, updated RFQ to get the absolute latest data from the DB
+      const updatedRfqFromServer = await fetch(
+        `http://localhost:5001/api/rfqs/${rfqId}`
+      ).then((res) => res.json());
+
       setRfqs((prevRfqs) => {
-        if (updateData.isArchived) {
+        if (updatedRfqFromServer.isArchived) {
+          // If archived, remove it from the active list
           return prevRfqs.filter((rfq) => rfq._id !== rfqId);
         }
+        // Otherwise, replace the old version with the new one from the server
         return prevRfqs.map((rfq) =>
-          rfq._id === rfqId ? { ...rfq, ...updateData } : rfq
+          rfq._id === rfqId ? updatedRfqFromServer : rfq
         );
       });
     } catch (error) {

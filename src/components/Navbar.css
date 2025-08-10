@@ -32,6 +32,7 @@
   flex-grow: 1;
   display: flex;
   justify-content: center; /* Center the search bar within this flexible space */
+  padding-right: 15%;
 }
 
 /*

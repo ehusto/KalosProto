@@ -28,7 +28,6 @@ export function MeasurementProvider({ children }) {
         );
       }
     };
-    // This line is now active
     fetchMeasurements();
   }, []);
 
@@ -39,10 +38,34 @@ export function MeasurementProvider({ children }) {
     ]);
   };
 
+  // ---BOM Generation---
+  const calculateBOM = async (measurementId) => {
+    try {
+      const response = await fetch(
+        `http://localhost:5001/api/measurements/${measurementId}/calculate-bom`,
+        {
+          method: "POST",
+        }
+      );
+      if (!response.ok) throw new Error("BOM calculation failed");
+      const newBom = await response.json();
+
+      // Update our local state to include the new BOM
+      setMeasurements((prev) =>
+        prev.map((m) =>
+          m._id === measurementId ? { ...m, billOfMaterials: newBom } : m
+        )
+      );
+    } catch (error) {
+      console.error("CONTEXT: Failed to calculate BOM:", error);
+    }
+  };
+
   const value = useMemo(
     () => ({
       measurements,
       addMeasurement,
+      calculateBOM,
     }),
     [measurements]
   );
