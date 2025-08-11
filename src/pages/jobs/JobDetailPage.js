@@ -170,8 +170,17 @@ function JobDetailPage() {
             </button>
           )}
           {job.status === "Paid in Full" && (
-            <p style={{ color: "#27ae60", fontWeight: "bold" }}>
-              ✓ This job is complete and paid.
+            <button
+              onClick={() => handleStatusUpdate("Closed")}
+              className="add-customer-btn"
+              style={{ backgroundColor: "#7f8c8d" }}
+            >
+              Close Job
+            </button>
+          )}
+          {job.status === "Closed" && (
+            <p style={{ color: "#7f8c8d", fontWeight: "bold" }}>
+              ✓ This job has been closed.
             </p>
           )}
         </div>
