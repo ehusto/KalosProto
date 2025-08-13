@@ -2,9 +2,9 @@
 
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { useMeasurements } from "../../context/MeasurementContext";
-import { useRfqs } from "../../features/rfqs/RfqContext";
-import { useCustomers } from "../../features/customers/CustomerContext";
+import { useMeasurements } from "./MeasurementContext";
+import { useRfqs } from "../rfqs/RfqContext";
+import { useCustomers } from "../customers/CustomerContext";
 import MeasurementDetailModal from "../../components/MeasurementDetailModal/MeasurementDetailModal";
 import "../../features/customers/CustomerListPage.css";
 

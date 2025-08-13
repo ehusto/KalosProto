@@ -1,7 +1,7 @@
 // File: src/components/MeasurementDetailModal/MeasurementDetailModal.js
 import React from "react";
 import { Link } from "react-router-dom";
-import MeasurementDisplay from "../MeasurementForm/MeasurementDisplay"; // Reuse our display
+import MeasurementDisplay from "../../features/measurements/MeasurementDisplay"; // Reuse our display
 import BillOfMaterialsDisplay from "../BillOfMaterialsDisplay/BillOfMaterialsDisplay";
 import "./MeasurementDetailModal.css";
 

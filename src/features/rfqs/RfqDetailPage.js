@@ -4,10 +4,10 @@ import React, { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { useRfqs } from "./RfqContext";
 import { useCustomers } from "../../features/customers/CustomerContext";
-import { useMeasurements } from "../../context/MeasurementContext";
+import { useMeasurements } from "../measurements/MeasurementContext";
 import { useJobs } from "../../features/jobs/JobContext";
-import MeasurementForm from "../../components/MeasurementForm/MeasurementForm";
-import MeasurementDisplay from "../../components/MeasurementForm/MeasurementDisplay";
+import MeasurementForm from "../measurements/MeasurementForm";
+import MeasurementDisplay from "../measurements/MeasurementDisplay";
 import BillOfMaterialsDisplay from "../../components/BillOfMaterialsDisplay/BillOfMaterialsDisplay";
 
 function RfqDetailPage() {
