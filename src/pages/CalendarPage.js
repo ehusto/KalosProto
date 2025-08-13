@@ -2,11 +2,8 @@
 
 import React, { useState } from "react";
 import { useJobs } from "../context/JobContext";
-import { useCustomers } from "../context/CustomerContext";
-import { useNavigate } from "react-router-dom";
-// --- THIS IS THE CORRECTED IMPORT PATH ---
+import { useCustomers } from "../features/customers/CustomerContext";
 import EventDetailModal from "../components/EventDetailModal/EventDetailModal";
-
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 
@@ -15,14 +12,12 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 function CalendarPage() {
   const { jobs } = useJobs();
   const { customers } = useCustomers();
-  const navigate = useNavigate();
-
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedJob, setSelectedJob] = useState(null);
-
   const events = jobs.map((job) => {
     const customer = customers.find((c) => c._id === job.customer_id);
     const customerName = customer ? customer.name : "Unknown";
+
     return {
       id: job._id,
       title: `${job.job_id}: ${customerName}`,

@@ -1,8 +1,8 @@
-// File: src/pages/customers/AddCustomerPage.js
+// File: src/features/customers/AddCustomerPage.js
 
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useCustomers } from "../../context/CustomerContext";
+import { useCustomers } from "../../features/customers/CustomerContext";
 import { IMaskInput } from "react-imask"; // <-- IMPORT THE NEW COMPONENT
 import "./AddCustomerPage.css";
 

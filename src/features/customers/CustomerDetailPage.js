@@ -2,7 +2,7 @@
 
 import React from "react";
 import { useParams, Link } from "react-router-dom";
-import { useCustomers } from "../../context/CustomerContext";
+import { useCustomers } from "./CustomerContext";
 import { formatPhoneNumber } from "../../utils/formatting"; // <-- IMPORT THE FORMATTING FUNCTION
 
 function CustomerDetailPage() {

@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { useRfqs } from "../../context/RfqContext";
-import { useCustomers } from "../../context/CustomerContext";
+import { useCustomers } from "../../features/customers/CustomerContext";
 import { useMeasurements } from "../../context/MeasurementContext";
 import { useJobs } from "../../context/JobContext";
 import MeasurementForm from "../../components/MeasurementForm/MeasurementForm";

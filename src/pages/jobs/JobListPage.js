@@ -3,7 +3,7 @@
 import React, { useMemo } from "react";
 import { Link } from "react-router-dom";
 import { useJobs } from "../../context/JobContext";
-import { useCustomers } from "../../context/CustomerContext";
+import { useCustomers } from "../../features/customers/CustomerContext";
 import { useFilters } from "../../context/FilterContext"; // Import the new filter hook
 import JobCard from "../../components/JobCard";
 import "./JobListPage.css"; // We'll keep this for the header style

@@ -2,8 +2,8 @@
 
 import React from "react";
 import { Link } from "react-router-dom";
-import { useCustomers } from "../../context/CustomerContext";
-import CustomerCard from "../../components/CustomerCard";
+import { useCustomers } from "./CustomerContext";
+import CustomerCard from "./CustomerCard";
 import "./CustomerListPage.css";
 
 function CustomerListPage() {

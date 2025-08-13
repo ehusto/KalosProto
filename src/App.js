@@ -2,7 +2,7 @@
 
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { CustomerProvider } from "./context/CustomerContext";
+import { CustomerProvider } from "./features/customers/CustomerContext";
 import { JobProvider } from "./context/JobContext";
 import { RfqProvider } from "./context/RfqContext";
 import { MeasurementProvider } from "./context/MeasurementContext";
@@ -12,9 +12,9 @@ import "./App.css";
 // Import all page components
 import Navbar from "./components/Navbar";
 import Dashboard from "./pages/Dashboard";
-import CustomerListPage from "./pages/customers/CustomerListPage";
-import AddCustomerPage from "./pages/customers/AddCustomerPage";
-import CustomerDetailPage from "./pages/customers/CustomerDetailPage";
+import CustomerListPage from "./features/customers/CustomerListPage";
+import AddCustomerPage from "./features/customers/AddCustomerPage";
+import CustomerDetailPage from "./features/customers/CustomerDetailPage";
 import JobListPage from "./pages/jobs/JobListPage";
 import AddJobPage from "./pages/jobs/AddJobPage";
 import JobDetailPage from "./pages/jobs/JobDetailPage";

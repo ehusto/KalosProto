@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useMeasurements } from "../../context/MeasurementContext";
 import { useRfqs } from "../../context/RfqContext";
-import { useCustomers } from "../../context/CustomerContext";
+import { useCustomers } from "../../features/customers/CustomerContext";
 import MeasurementDetailModal from "../../components/MeasurementDetailModal/MeasurementDetailModal";
 import "../../pages/customers/CustomerListPage.css";
 

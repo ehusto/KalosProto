@@ -3,7 +3,7 @@
 import React from "react";
 import { useParams, Link } from "react-router-dom";
 import { useJobs } from "../../context/JobContext";
-import { useCustomers } from "../../context/CustomerContext";
+import { useCustomers } from "../../features/customers/CustomerContext";
 
 function JobDetailPage() {
   const { jobs, updateJob } = useJobs(); // Get the new updateJob function

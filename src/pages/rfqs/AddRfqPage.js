@@ -2,9 +2,9 @@
 
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useCustomers } from "../../context/CustomerContext";
+import { useCustomers } from "../../features/customers/CustomerContext";
 import { useRfqs } from "../../context/RfqContext";
-import "../../pages/customers/AddCustomerPage.css"; // Reuse form styles
+import "../../features/customers/AddCustomerPage.css"; // Reuse form styles
 
 function AddRfqPage() {
   const navigate = useNavigate();

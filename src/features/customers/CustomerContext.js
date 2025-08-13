@@ -1,4 +1,4 @@
-// File: src/context/CustomerContext.js
+// File: src/features/customers/CustomerContext.js
 
 import React, {
   createContext,

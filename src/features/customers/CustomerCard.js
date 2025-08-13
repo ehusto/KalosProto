@@ -1,4 +1,4 @@
-// File: src/components/CustomerCard.js
+// File: src/features/customers/CustomerCard.js
 
 import React from "react";
 import { Link } from "react-router-dom";

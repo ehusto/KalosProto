@@ -2,10 +2,10 @@
 
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { useCustomers } from "../../context/CustomerContext";
+import { useCustomers } from "../../features/customers/CustomerContext";
 import { useJobs } from "../../context/JobContext";
 import { useRfqs } from "../../context/RfqContext"; // We need the RFQ update function
-import "../../pages/customers/AddCustomerPage.css";
+import "../../features/customers/AddCustomerPage.css";
 
 // Custom hook to read URL query parameters
 function useQuery() {

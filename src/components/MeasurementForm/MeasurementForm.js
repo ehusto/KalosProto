@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { useMeasurements } from "../../context/MeasurementContext";
-import "../../pages/customers/AddCustomerPage.css"; // Reuse form styles
+import "../../features/customers/AddCustomerPage.css"; // Reuse form styles
 
 // This component will receive the RFQ's ID and a function to call when it's done.
 function MeasurementForm({ rfqId, onSave }) {
