@@ -6,11 +6,11 @@ import { CustomerProvider } from "./features/customers/CustomerContext";
 import { JobProvider } from "./features/jobs/JobContext";
 import { RfqProvider } from "./features/rfqs/RfqContext";
 import { MeasurementProvider } from "./features/measurements/MeasurementContext";
-import { FilterProvider } from "./context/FilterContext"; // <-- IMPORT THE MISSING PROVIDER
+import { FilterProvider } from "./store/FilterContext"; // <-- IMPORT THE MISSING PROVIDER
 import "./App.css";
 
 // Import all page components
-import Navbar from "./components/Navbar";
+import Navbar from "./components/navbar/Navbar";
 import Dashboard from "./pages/Dashboard";
 import CustomerListPage from "./features/customers/CustomerListPage";
 import AddCustomerPage from "./features/customers/AddCustomerPage";

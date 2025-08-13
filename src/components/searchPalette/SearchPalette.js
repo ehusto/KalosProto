@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import { COMMANDS } from "../core/commands"; // Import our command list
+import { COMMANDS } from "../../core/commands"; // Import our command list
 import "./SearchPalette.css";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

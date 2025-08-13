@@ -2,7 +2,7 @@
 
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
-import SearchPalette from "./SearchPalette";
+import SearchPalette from "../searchPalette/SearchPalette";
 import JobFilterDropdown from "./JobFilterDropdown";
 import "./Navbar.css";
 
