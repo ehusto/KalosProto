@@ -2,10 +2,10 @@
 
 import React, { useMemo } from "react";
 import { Link } from "react-router-dom";
-import { useJobs } from "../../context/JobContext";
-import { useCustomers } from "../../features/customers/CustomerContext";
+import { useJobs } from "./JobContext";
+import { useCustomers } from "../customers/CustomerContext";
 import { useFilters } from "../../context/FilterContext"; // Import the new filter hook
-import JobCard from "../../components/JobCard";
+import JobCard from "./JobCard";
 import "./JobListPage.css"; // We'll keep this for the header style
 
 function JobListPage() {

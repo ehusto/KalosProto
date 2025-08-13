@@ -5,7 +5,7 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import { useRfqs } from "../../context/RfqContext";
 import { useCustomers } from "../../features/customers/CustomerContext";
 import { useMeasurements } from "../../context/MeasurementContext";
-import { useJobs } from "../../context/JobContext";
+import { useJobs } from "../../features/jobs/JobContext";
 import MeasurementForm from "../../components/MeasurementForm/MeasurementForm";
 import MeasurementDisplay from "../../components/MeasurementForm/MeasurementDisplay";
 import BillOfMaterialsDisplay from "../../components/BillOfMaterialsDisplay/BillOfMaterialsDisplay";

@@ -3,7 +3,7 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { CustomerProvider } from "./features/customers/CustomerContext";
-import { JobProvider } from "./context/JobContext";
+import { JobProvider } from "./features/jobs/JobContext";
 import { RfqProvider } from "./context/RfqContext";
 import { MeasurementProvider } from "./context/MeasurementContext";
 import { FilterProvider } from "./context/FilterContext"; // <-- IMPORT THE MISSING PROVIDER
@@ -15,9 +15,9 @@ import Dashboard from "./pages/Dashboard";
 import CustomerListPage from "./features/customers/CustomerListPage";
 import AddCustomerPage from "./features/customers/AddCustomerPage";
 import CustomerDetailPage from "./features/customers/CustomerDetailPage";
-import JobListPage from "./pages/jobs/JobListPage";
-import AddJobPage from "./pages/jobs/AddJobPage";
-import JobDetailPage from "./pages/jobs/JobDetailPage";
+import JobListPage from "./features/jobs/JobListPage";
+import AddJobPage from "./features/jobs/AddJobPage";
+import JobDetailPage from "./features/jobs/JobDetailPage";
 import CalendarPage from "./pages/CalendarPage";
 import RfqListPage from "./pages/rfqs/RfqListPage";
 import AddRfqPage from "./pages/rfqs/AddRfqPage";
