@@ -2,8 +2,8 @@
 
 import React from "react";
 import { Link } from "react-router-dom";
-import { useRfqs } from "../../context/RfqContext";
-import RfqCard from "../../components/RfqCard";
+import { useRfqs } from "./RfqContext";
+import RfqCard from "./RfqCard";
 import "../../pages/customers/CustomerListPage.css"; // Reuse header/button styles
 
 function RfqListPage() {

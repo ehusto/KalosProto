@@ -4,7 +4,7 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { CustomerProvider } from "./features/customers/CustomerContext";
 import { JobProvider } from "./features/jobs/JobContext";
-import { RfqProvider } from "./context/RfqContext";
+import { RfqProvider } from "./features/rfqs/RfqContext";
 import { MeasurementProvider } from "./context/MeasurementContext";
 import { FilterProvider } from "./context/FilterContext"; // <-- IMPORT THE MISSING PROVIDER
 import "./App.css";
@@ -19,10 +19,10 @@ import JobListPage from "./features/jobs/JobListPage";
 import AddJobPage from "./features/jobs/AddJobPage";
 import JobDetailPage from "./features/jobs/JobDetailPage";
 import CalendarPage from "./pages/CalendarPage";
-import RfqListPage from "./pages/rfqs/RfqListPage";
-import AddRfqPage from "./pages/rfqs/AddRfqPage";
+import RfqListPage from "./features/rfqs/RfqListPage";
+import AddRfqPage from "./features/rfqs/AddRfqPage";
 import RfqDetailPage from "./pages/rfqs/RfqDetailPage";
-import RfqArchivePage from "./pages/rfqs/RfqArchivePage";
+import RfqArchivePage from "./features/rfqs/RfqArchivePage";
 import MeasurementListPage from "./pages/measurements/MeasurementListPage";
 
 function App() {

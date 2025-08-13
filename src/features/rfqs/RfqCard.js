@@ -2,7 +2,7 @@
 
 import React from "react";
 import { Link } from "react-router-dom";
-import { useCustomers } from "../features/customers/CustomerContext";
+import { useCustomers } from "../customers/CustomerContext";
 import "./JobCard.css"; // Reuse the JobCard styles
 
 function RfqCard({ rfq }) {

@@ -3,10 +3,10 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useMeasurements } from "../../context/MeasurementContext";
-import { useRfqs } from "../../context/RfqContext";
+import { useRfqs } from "../../features/rfqs/RfqContext";
 import { useCustomers } from "../../features/customers/CustomerContext";
 import MeasurementDetailModal from "../../components/MeasurementDetailModal/MeasurementDetailModal";
-import "../../pages/customers/CustomerListPage.css";
+import "../../features/customers/CustomerListPage.css";
 
 function MeasurementListPage() {
   const { measurements } = useMeasurements();

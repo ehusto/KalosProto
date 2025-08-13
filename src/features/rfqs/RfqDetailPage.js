@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
-import { useRfqs } from "../../context/RfqContext";
+import { useRfqs } from "./RfqContext";
 import { useCustomers } from "../../features/customers/CustomerContext";
 import { useMeasurements } from "../../context/MeasurementContext";
 import { useJobs } from "../../features/jobs/JobContext";
