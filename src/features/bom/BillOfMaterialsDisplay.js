@@ -1,4 +1,4 @@
-// File: src/components/BillOfMaterialsDisplay/BillOfMaterialsDisplay.js
+// File: src/feature/bom/BillOfMaterialsDisplay.js
 
 import React from "react";
 import "./BillOfMaterialsDisplay.css";

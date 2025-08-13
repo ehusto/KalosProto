@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useCustomers } from "../../features/customers/CustomerContext";
+import { useCustomers } from "./CustomerContext";
 import { IMaskInput } from "react-imask"; // <-- IMPORT THE NEW COMPONENT
 import "./AddCustomerPage.css";
 
