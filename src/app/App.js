@@ -2,9 +2,9 @@
 
 import React from "react";
 import { BrowserRouter as Router } from "react-router-dom";
-import { AppProviders } from "./providers/AppProviders";
-import { AppRoutes } from "./routes/AppRoutes";
-import Navbar from "./components/navbar/Navbar";
+import { AppProviders } from "./AppProviders";
+import { AppRoutes } from "./AppRoutes";
+import Navbar from "../components/navbar/Navbar";
 import "./App.css";
 
 function App() {

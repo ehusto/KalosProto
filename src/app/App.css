@@ -15,7 +15,7 @@
 /* This rule now uses the --bg-image variable passed from the Dashboard component */
 .dashboard-background {
   /* It uses var() to access the variable */
-  background-image: url("./large20.png");
+  background-image: url("../large20.png");
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
