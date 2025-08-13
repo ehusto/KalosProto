@@ -8,7 +8,7 @@ import { useMeasurements } from "../measurements/MeasurementContext";
 import { useJobs } from "../../features/jobs/JobContext";
 import MeasurementForm from "../measurements/MeasurementForm";
 import MeasurementDisplay from "../measurements/MeasurementDisplay";
-import BillOfMaterialsDisplay from "../../components/BillOfMaterialsDisplay/BillOfMaterialsDisplay";
+import BillOfMaterialsDisplay from "../bom/BillOfMaterialsDisplay";
 
 function RfqDetailPage() {
   const { rfqs, updateRfq } = useRfqs();

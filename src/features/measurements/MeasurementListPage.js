@@ -1,12 +1,12 @@
-// File: src/pages/measurements/MeasurementListPage.js
+// File: src/features/measurements/MeasurementListPage.js
 
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import { useMeasurements } from "./MeasurementContext";
 import { useRfqs } from "../rfqs/RfqContext";
 import { useCustomers } from "../customers/CustomerContext";
-import MeasurementDetailModal from "../../components/MeasurementDetailModal/MeasurementDetailModal";
-import "../../features/customers/CustomerListPage.css";
+import MeasurementDetailModal from "./MeasurementDetailModal";
+import "../customers/CustomerListPage";
 
 function MeasurementListPage() {
   const { measurements } = useMeasurements();

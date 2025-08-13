@@ -1,13 +1,11 @@
-// File: src/pages/CalendarPage.js
+// File: src/features/calendar/CalendarPage.js
 
 import React, { useState } from "react";
 import { useJobs } from "../jobs/JobContext";
 import { useCustomers } from "../customers/CustomerContext";
-import EventDetailModal from "../../components/EventDetailModal/EventDetailModal";
+import EventDetailModal from "../calendar/EventDetailModal";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
-
-// The CSS for FullCalendar is correctly loaded in your public/index.html
 
 function CalendarPage() {
   const { jobs } = useJobs();

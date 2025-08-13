@@ -2,7 +2,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import MeasurementDisplay from "../../features/measurements/MeasurementDisplay"; // Reuse our display
-import BillOfMaterialsDisplay from "../BillOfMaterialsDisplay/BillOfMaterialsDisplay";
+import BillOfMaterialsDisplay from "../bom/BillOfMaterialsDisplay";
 import "./MeasurementDetailModal.css";
 
 function MeasurementDetailModal({ measurement, rfq, customer, onClose }) {

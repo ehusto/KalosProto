@@ -3,7 +3,7 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import SearchPalette from "../searchPalette/SearchPalette";
-import JobFilterDropdown from "./JobFilterDropdown";
+import JobFilterDropdown from "../../features/jobs/JobFilterDropdown";
 import "./Navbar.css";
 
 function Navbar() {
@@ -11,7 +11,6 @@ function Navbar() {
 
   return (
     <nav className="navbar">
-      {/* The brand logo now serves as the primary "home" button */}
       <Link to="/" className="navbar-brand">
         Kalos Exteriors
       </Link>
@@ -22,12 +21,7 @@ function Navbar() {
 
       {location.pathname === "/jobs" && <JobFilterDropdown />}
 
-      {/* The entire <ul> for the right-side links can now be removed,
-          or kept empty if you plan to add other links later (like a "Log Out" button).
-          Let's remove it for maximum cleanliness. */}
-      <ul className="navbar-nav">
-        {/* The <li> for the "Dashboard" link has been deleted. */}
-      </ul>
+      <ul className="navbar-nav"></ul>
     </nav>
   );
 }

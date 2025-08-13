@@ -1,4 +1,4 @@
-// File: src/core/commands.js
+// File: src/config/commands.js
 
 import {
   faUsers,

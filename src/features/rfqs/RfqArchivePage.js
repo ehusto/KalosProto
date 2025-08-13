@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom"; // <-- IMPORT useLocation
 import RfqCard from "./RfqCard";
-import "../../pages/customers/CustomerListPage.css";
+import "../customers/CustomerListPage.css";
 
 function RfqArchivePage() {
   const [archivedRfqs, setArchivedRfqs] = useState([]);

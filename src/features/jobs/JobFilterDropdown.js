@@ -1,7 +1,7 @@
-// File: src/components/JobFilterDropdown.js
+// File: src/features/jobs/JobFilterDropdown.js
 import React, { useState, useEffect, useRef } from "react";
-import { useJobs } from "../features/jobs/JobContext";
-import { useFilters } from "../context/FilterContext";
+import { useJobs } from "./JobContext";
+import { useFilters } from "../../store/FilterContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilter } from "@fortawesome/free-solid-svg-icons";
 import "./JobFilterDropdown.css"; // <-- We'll create this

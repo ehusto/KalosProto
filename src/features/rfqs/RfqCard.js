@@ -3,7 +3,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useCustomers } from "../customers/CustomerContext";
-import "./JobCard.css"; // Reuse the JobCard styles
+import "../jobs/JobCard.css"; // Reuse the JobCard styles
 
 function RfqCard({ rfq }) {
   const { customers } = useCustomers();

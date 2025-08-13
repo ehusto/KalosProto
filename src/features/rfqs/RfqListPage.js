@@ -4,7 +4,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useRfqs } from "./RfqContext";
 import RfqCard from "./RfqCard";
-import "../../pages/customers/CustomerListPage.css"; // Reuse header/button styles
+import "../customers/CustomerListPage.css"; // Reuse header/button styles
 
 function RfqListPage() {
   const { rfqs } = useRfqs();

@@ -11,7 +11,7 @@ import "./App.css";
 
 // Import all page components
 import Navbar from "./components/navbar/Navbar";
-import Dashboard from "./pages/Dashboard";
+import Dashboard from "./pages/dashboard/Dashboard";
 import CustomerListPage from "./features/customers/CustomerListPage";
 import AddCustomerPage from "./features/customers/AddCustomerPage";
 import CustomerDetailPage from "./features/customers/CustomerDetailPage";
@@ -21,7 +21,7 @@ import JobDetailPage from "./features/jobs/JobDetailPage";
 import CalendarPage from "./features/calendar/CalendarPage";
 import RfqListPage from "./features/rfqs/RfqListPage";
 import AddRfqPage from "./features/rfqs/AddRfqPage";
-import RfqDetailPage from "./pages/rfqs/RfqDetailPage";
+import RfqDetailPage from "./features/rfqs/RfqDetailPage";
 import RfqArchivePage from "./features/rfqs/RfqArchivePage";
 import MeasurementListPage from "./features/measurements/MeasurementListPage";
 
