@@ -1,9 +1,9 @@
 // File: src/pages/CalendarPage.js
 
 import React, { useState } from "react";
-import { useJobs } from "../features/jobs/JobContext";
-import { useCustomers } from "../features/customers/CustomerContext";
-import EventDetailModal from "../components/EventDetailModal/EventDetailModal";
+import { useJobs } from "../jobs/JobContext";
+import { useCustomers } from "../customers/CustomerContext";
+import EventDetailModal from "../../components/EventDetailModal/EventDetailModal";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 

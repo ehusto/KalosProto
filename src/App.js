@@ -18,7 +18,7 @@ import CustomerDetailPage from "./features/customers/CustomerDetailPage";
 import JobListPage from "./features/jobs/JobListPage";
 import AddJobPage from "./features/jobs/AddJobPage";
 import JobDetailPage from "./features/jobs/JobDetailPage";
-import CalendarPage from "./pages/CalendarPage";
+import CalendarPage from "./features/calendar/CalendarPage";
 import RfqListPage from "./features/rfqs/RfqListPage";
 import AddRfqPage from "./features/rfqs/AddRfqPage";
 import RfqDetailPage from "./pages/rfqs/RfqDetailPage";
