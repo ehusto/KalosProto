@@ -2,7 +2,7 @@
 
 import React from "react";
 import { Link } from "react-router-dom";
-import { formatPhoneNumber } from "../utils/formatting"; // Import our formatting function
+import { formatPhoneNumber } from "../../lib/formatting"; // Import our formatting function
 import "./CustomerCard.css"; // This should point to your swoop CSS file
 
 function CustomerCard({ customer }) {

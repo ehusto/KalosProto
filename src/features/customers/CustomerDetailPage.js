@@ -3,7 +3,7 @@
 import React from "react";
 import { useParams, Link } from "react-router-dom";
 import { useCustomers } from "./CustomerContext";
-import { formatPhoneNumber } from "../../utils/formatting"; // <-- IMPORT THE FORMATTING FUNCTION
+import { formatPhoneNumber } from "../../lib/formatting"; // <-- IMPORT THE FORMATTING FUNCTION
 
 function CustomerDetailPage() {
   const { customers } = useCustomers();
